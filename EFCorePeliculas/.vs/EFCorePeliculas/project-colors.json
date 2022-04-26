@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "fd6b0f8b-a797-4586-9760-9a3ff61acb0c": {
+      "ProjectGuid": "fd6b0f8b-a797-4586-9760-9a3ff61acb0c",
+      "DisplayName": "EFCorePeliculas",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
