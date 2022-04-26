@@ -4,6 +4,7 @@ using EFCorePeliculas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
@@ -12,9 +13,10 @@ using NetTopologySuite.Geometries;
 namespace EFCorePeliculas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220426183341_Moneda")]
+    partial class Moneda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -503,19 +505,6 @@ namespace EFCorePeliculas.Migrations
                             Precio = 290m,
                             TipoSalaDeCine = "TresDimensiones"
                         });
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.SinLlaves.CineSinUbicacion", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToView(null);
-
-                    b.ToSqlQuery("Select Id, Name From Cines");
                 });
 
             modelBuilder.Entity("GeneroPelicula", b =>

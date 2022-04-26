@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCorePeliculas.Entities.Conversiones;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EFCorePeliculas.Entities.Configurations
@@ -13,6 +14,8 @@ namespace EFCorePeliculas.Entities.Configurations
                 .HasDefaultValue(TipoSalaDeCine.DosDimensiones)
                 .HasConversion<string>();
             //el hasconversion combierto el valor del enum en string, esto lo hace entityframework
+
+            builder.Property(prop => prop.Moneda).HasConversion<MonedaASimbolo>();
         }
     }
 }

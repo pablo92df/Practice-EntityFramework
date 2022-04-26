@@ -1,5 +1,6 @@
 ﻿using EFCorePeliculas.Entities;
 using EFCorePeliculas.Entities.Seeding;
+using EFCorePeliculas.Entities.SinLlaves;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -24,11 +25,17 @@ namespace EFCorePeliculas.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             SeedingModuloConsultas.Seed(modelBuilder);
 
+
+            //escribo la query de donde saco los datos para poner en CineSinUbicacion 
+            modelBuilder.Entity<CineSinUbicacion>().ToSqlQuery("Select Id, Name From Cines").ToView(null);
+
+
+            modelBuilder.Entity<PeliculaConConteos>().HasNoKey().ToView("PeliculasConConteos");
             //este sirve para asignar una PK, por defecto si no pongo nada solo se reconoce como PK si se llama Id o claseID
             //si uso otro nombre tengo que usar [Key] o modifico aca
             // modelBuilder.Entity<Genero>().HasKey(prop => prop.Identificador);
             //limita el string en la base de datos
-            //// modelBuilder.Entity<Genero>().Property(prop => prop.Nombre).HasMaxLength(150).IsRequired();
+            // modelBuilder.Entity<Genero>().Property(prop => prop.Nombre).HasMaxLength(150).IsRequired();
             //modelBuilder.Entity<Genero>().ToTable(name: "TablaGeneros", schema: "Peliculas");//sirve para cambiar el nombre de la tabla
 
 
@@ -62,7 +69,7 @@ namespace EFCorePeliculas.Data
         public DbSet<CineOferta> CinesOfertas { get; set; }
         public DbSet<SalaDeCine> SalasDeCine { get; set; }
         public DbSet<PeliculaActor> PeliculasActores { get; set; }
-
+        public DbSet<CineSinUbicacion> CineSinUbicacions { get; set; }
         public DbSet<Log> Logs  { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using EFCorePeliculas.Data;
 using EFCorePeliculas.DTOs;
 using EFCorePeliculas.Entities;
+using EFCorePeliculas.Entities.SinLlaves;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
@@ -27,6 +28,14 @@ namespace EFCorePeliculas.Controllers
         public async Task<IEnumerable<CineDTO>> Get() 
         {
             return await context.Cines.ProjectTo<CineDTO>(mapper.ConfigurationProvider).ToListAsync();
+        }
+        [HttpGet("SinUbicacion")]
+        public async Task<IEnumerable<CineSinUbicacion>> GetCinesSinUbicacion() 
+        {
+            //SET permite crear en tiempo real un DTO esta opcion es si no creo el DBset de CineSinUbicacion
+          //  return await context.Set<CineSinUbicacion>().ToListAsync();
+
+            return await context.CineSinUbicacions.ToListAsync();
         }
 
         [HttpGet("cercanos")]
