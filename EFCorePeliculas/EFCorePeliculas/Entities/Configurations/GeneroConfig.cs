@@ -15,6 +15,7 @@ namespace EFCorePeliculas.Entities.Configurations
             //le agrego un filtro
             builder.HasIndex(g => g.Nombre).IsUnique().HasFilter("EstaBorrado = 'false'");
 
+            builder.Property<DateTime>("FechaCreacion").HasDefaultValueSql("GetDate()").HasColumnType("datetime2");
         }
     }
 }

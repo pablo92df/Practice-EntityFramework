@@ -20,25 +20,38 @@ namespace EFCorePeliculas.Controllers
         public async Task<IEnumerable<Genero>> Get() 
         {
             // el asnotracking es para hacer consultas de solo lectura, son consultas mas rapidas que las normales
-           //si uso astracking puedo tener seguimientos de los cambios en la entidad para despues guarda con savechanges
+            //si uso astracking puedo tener seguimientos de los cambios en la entidad para despues guarda con savechanges
             // return await context.Generos.AsNoTracking().ToListAsync();
 
 
 
-            return await context.Generos.ToListAsync();
+            //return await context.Generos.ToListAsync();
+            //ordeno por una propiedad sombra, crea una columna sin modificar la entidad Genero
+            return await context.Generos.OrderByDescending(g=>EF.Property<DateTime>(g,"FechaCreacion")).ToListAsync();
+
 
         }
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Genero>> Get(int id) 
         {
-            var genero = await context.Generos.FirstOrDefaultAsync(g=>g.Id == id);
+            var genero = await context.Generos.AsTracking().FirstOrDefaultAsync(g=>g.Id == id);
 
             if (genero is null) 
             {
                 return NotFound();
             }
+            //busco el valor de la propiedad sombra
+            var fechaCreacion = context.Entry(genero).Property<DateTime>("FechaCreacion").CurrentValue;
 
-            return genero;
+            return Ok(new
+            {
+                Id = genero.Id,
+                NoContent = genero.Nombre,
+                fechaCreacion
+
+            });
+
+           
         
         }
         [HttpGet("primer")]

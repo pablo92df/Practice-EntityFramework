@@ -6,23 +6,23 @@ namespace EFCorePeliculas.Entities
     {
         public int Id { get; set; }
         private string _Name;
-      
-        public string Name 
-            { get 
-                { 
-                    return _Name;
-                }
-                set
-                {
+
+        public string Name
+        { get
+            {
+                return _Name;
+            }
+            set
+            {
                 _Name = string.Join(' ', value.Split(' ')
                     .Select(x => x[0].ToString().ToUpper() + x.Substring(1).ToLower()).ToArray());
-                }
             }
+        }
         public string Biografia { get; set; }
         //  [Column(TypeName = "Date")]
         public DateTime? FechaNacimiento { get; set; }
-        public  HashSet<PeliculaActor> PeliculasActores { get; set; }
-
+        public HashSet<PeliculaActor> PeliculasActores { get; set; }
+        public string FotoURL {get;set;}
         [NotMapped]//ignora la propiedad en la migracion y no crea la columna en la base de datos
         public int? Edad 
         {

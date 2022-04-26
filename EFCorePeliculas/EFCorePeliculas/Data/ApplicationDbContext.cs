@@ -31,6 +31,20 @@ namespace EFCorePeliculas.Data
 
 
             modelBuilder.Entity<PeliculaConConteos>().HasNoKey().ToView("PeliculasConConteos");
+
+            //con esto puedo afectar a todas las entidas ya que las recorro ahora aplico a cualquier entidad 
+            foreach (var tipoEntidad in modelBuilder.Model.GetEntityTypes()) 
+            {
+                foreach (var propiedad in tipoEntidad.GetProperties())
+                {//Clrtype es para ver que tipo de dato es la propiedad
+                    if (propiedad.ClrType == typeof(string) && propiedad.Name.Contains("URL", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        //en este caso configuro todas las propiedas que tengan URL en su nombre 
+                        propiedad.SetIsUnicode(false);
+                        propiedad.SetMaxLength(500);
+                    }
+                }
+            }
             //este sirve para asignar una PK, por defecto si no pongo nada solo se reconoce como PK si se llama Id o claseID
             //si uso otro nombre tengo que usar [Key] o modifico aca
             // modelBuilder.Entity<Genero>().HasKey(prop => prop.Identificador);
