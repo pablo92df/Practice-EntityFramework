@@ -99,5 +99,21 @@ namespace EFCorePeliculas.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            //cargo el cineoferta en memoria para que entityframework pueda modificar el id de cine cuando lo borro sino tira error
+            var cines = await context.Cines.Include(c => c.CineOferta).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (cines is null)
+            { 
+                return NotFound();
+            }
+
+            context.Remove(cines);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

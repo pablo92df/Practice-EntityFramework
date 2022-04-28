@@ -24,7 +24,7 @@ namespace EFCorePeliculas.Data
             //carga las configuraciones de la carpeta configurations
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             SeedingModuloConsultas.Seed(modelBuilder);
-
+            SeedingPersonaMensaje.Seed(modelBuilder);
 
             //escribo la query de donde saco los datos para poner en CineSinUbicacion 
             modelBuilder.Entity<CineSinUbicacion>().ToSqlQuery("Select Id, Name From Cines").ToView(null);
@@ -85,5 +85,7 @@ namespace EFCorePeliculas.Data
         public DbSet<PeliculaActor> PeliculasActores { get; set; }
         public DbSet<CineSinUbicacion> CineSinUbicacions { get; set; }
         public DbSet<Log> Logs  { get; set; }
+        public DbSet<Persona> Personas { get; set; }
+        public DbSet<Mensaje> Mensajes { get; set; }
     }
 }

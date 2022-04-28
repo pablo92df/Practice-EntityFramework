@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yzVqefk+o11hV2AyXhpLPsyW5pMEWy/qR73T14xkf59NhhIIK+0zlDinKmEtkBfOSqR8TiXrnsgSuQJLn1JJXw==",
+  "dgSpecHash": "9Gdl+LHIXSct+DE+BwCCtoWtYvG6nJVyuFW7pluilcxc59Z7mR9Rfu5z6qnUw+xo8hPRdofP0q18wFW+M2Ah2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pferreyra\\Source\\Repos\\Practice-EntityFramework\\EFCorePeliculas\\EFCorePeliculas\\EFCorePeliculas.csproj",
+  "projectFilePath": "C:\\Users\\Pferreyra\\source\\repos\\Practice-EntityFramework\\EFCorePeliculas\\EFCorePeliculas\\EFCorePeliculas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pferreyra\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Pferreyra\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
