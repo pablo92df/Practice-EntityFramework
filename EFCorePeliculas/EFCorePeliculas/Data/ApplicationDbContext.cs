@@ -45,6 +45,31 @@ namespace EFCorePeliculas.Data
                     }
                 }
             }
+            //aca configuro para que cada clase que hereda de producto cree una tabla en la DB
+            modelBuilder.Entity<Merchandising>().ToTable("Merchandising");
+            modelBuilder.Entity<PeliculaAlquilable>().ToTable("PeliculaAlquilable");
+
+            var pelicula1 = new PeliculaAlquilable()
+            {
+                Id = 1,
+                Nombre = "Spider-Man",
+                PeliculaId = 1,
+                Precio = 5.99m
+            };
+            var mercha1 = new Merchandising()
+            {
+                Id = 2,
+                DisponibleEnInventario = true,
+                EsRopa = true,
+                Nombre = "Shirt One Piece",
+                Peso = 1,
+                Volumen = 1,
+                Precio = 11
+            };
+
+            modelBuilder.Entity<Merchandising>().HasData(mercha1);
+            modelBuilder.Entity<PeliculaAlquilable>().HasData(pelicula1);
+
             //este sirve para asignar una PK, por defecto si no pongo nada solo se reconoce como PK si se llama Id o claseID
             //si uso otro nombre tengo que usar [Key] o modifico aca
             // modelBuilder.Entity<Genero>().HasKey(prop => prop.Identificador);
@@ -74,7 +99,7 @@ namespace EFCorePeliculas.Data
             //modelBuilder.Entity<PeliculaActor>().HasKey(prop => new { prop.PeliculaID, prop.ActorId });
 
             //modelBuilder.Entity<PeliculaActor>().Property(prop => prop.Personaje).HasMaxLength(150);
-           // modelBuilder.Ignore<Direccion>();
+            // modelBuilder.Ignore<Direccion>();
         }
         public DbSet<Genero> Generos { get; set; }
         public DbSet<Actor> Actors { get; set; }
@@ -87,5 +112,7 @@ namespace EFCorePeliculas.Data
         public DbSet<Log> Logs  { get; set; }
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Mensaje> Mensajes { get; set; }
+        public DbSet<Pago> Pagos { get; set; }
+        public DbSet<Producto> Productos { get; set; }
     }
 }

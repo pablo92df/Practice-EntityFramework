@@ -4,6 +4,7 @@ using EFCorePeliculas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
@@ -12,9 +13,10 @@ using NetTopologySuite.Geometries;
 namespace EFCorePeliculas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220429163731_HerenciaTableTPH")]
+    partial class HerenciaTableTPH
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -550,26 +552,6 @@ namespace EFCorePeliculas.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EFCorePeliculas.Entities.Producto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Precio")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Productos");
-                });
-
             modelBuilder.Entity("EFCorePeliculas.Entities.SalaDeCine", b =>
                 {
                     b.Property<int>("Id")
@@ -830,41 +812,6 @@ namespace EFCorePeliculas.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EFCorePeliculas.Entities.Merchandising", b =>
-                {
-                    b.HasBaseType("EFCorePeliculas.Entities.Producto");
-
-                    b.Property<bool>("DisponibleEnInventario")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("EsColeccionable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("EsRopa")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("Peso")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Volumen")
-                        .HasColumnType("float");
-
-                    b.ToTable("Merchandising", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Shirt One Piece",
-                            Precio = 11m,
-                            DisponibleEnInventario = true,
-                            EsColeccionable = false,
-                            EsRopa = true,
-                            Peso = 1.0,
-                            Volumen = 1.0
-                        });
-                });
-
             modelBuilder.Entity("EFCorePeliculas.Entities.PagoPaypal", b =>
                 {
                     b.HasBaseType("EFCorePeliculas.Entities.Pago");
@@ -911,7 +858,7 @@ namespace EFCorePeliculas.Migrations
                             Id = 1,
                             FechaTransaccion = new DateTime(2022, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Price = 157m,
-                            TipoPago = 2,
+                            TipoPago = 1,
                             Ultimos4Difitos = "1234"
                         },
                         new
@@ -919,27 +866,8 @@ namespace EFCorePeliculas.Migrations
                             Id = 2,
                             FechaTransaccion = new DateTime(2022, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Price = 91.9m,
-                            TipoPago = 2,
+                            TipoPago = 1,
                             Ultimos4Difitos = "4321"
-                        });
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.PeliculaAlquilable", b =>
-                {
-                    b.HasBaseType("EFCorePeliculas.Entities.Producto");
-
-                    b.Property<int>("PeliculaId")
-                        .HasColumnType("int");
-
-                    b.ToTable("PeliculaAlquilable", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "Spider-Man",
-                            Precio = 5.99m,
-                            PeliculaId = 1
                         });
                 });
 
@@ -1124,24 +1052,6 @@ namespace EFCorePeliculas.Migrations
                         .WithMany()
                         .HasForeignKey("SalaDeCinesId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.Merchandising", b =>
-                {
-                    b.HasOne("EFCorePeliculas.Entities.Producto", null)
-                        .WithOne()
-                        .HasForeignKey("EFCorePeliculas.Entities.Merchandising", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.PeliculaAlquilable", b =>
-                {
-                    b.HasOne("EFCorePeliculas.Entities.Producto", null)
-                        .WithOne()
-                        .HasForeignKey("EFCorePeliculas.Entities.PeliculaAlquilable", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 

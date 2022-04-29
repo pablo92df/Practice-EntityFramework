@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\EFCorePeliculas"
+    "\\EFCorePeliculas",
+    "\\EFCorePeliculas\\EFCorePeliculas",
+    "\\EFCorePeliculas\\EFCorePeliculas\\Data"
   ],
-  "SelectedNode": "\\EFCorePeliculas\\EFCorePeliculas.sln",
+  "SelectedNode": "\\EFCorePeliculas\\EFCorePeliculas\\Data\\ApplicationDbContext.cs",
   "PreviewInSolutionExplorer": false
 }

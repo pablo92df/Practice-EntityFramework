@@ -11,6 +11,12 @@ namespace EFCorePeliculas.Entities.Configurations
 
             builder.Property(x => x.Name).HasField("_Name");
 
+            builder.OwnsOne(a=>a.DireccionHogar, dir=> {//puedo modificar las propiedades de direccion 
+                dir.Property(d => d.calle).HasColumnName("calle");
+                dir.Property(d => d.provincia).HasColumnName("provincia");
+                dir.Property(d => d.pais).HasColumnName("pais");
+
+            });
         }
     }
 }

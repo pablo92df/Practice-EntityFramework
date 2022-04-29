@@ -4,6 +4,7 @@ using EFCorePeliculas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
@@ -12,9 +13,10 @@ using NetTopologySuite.Geometries;
 namespace EFCorePeliculas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220429161050_migration2")]
+    partial class migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,31 +355,6 @@ namespace EFCorePeliculas.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EFCorePeliculas.Entities.Pago", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("FechaTransaccion")
-                        .HasColumnType("date");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TipoPago")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pagos");
-
-                    b.HasDiscriminator<int>("TipoPago");
-                });
-
             modelBuilder.Entity("EFCorePeliculas.Entities.Pelicula", b =>
                 {
                     b.Property<int>("Id")
@@ -548,26 +525,6 @@ namespace EFCorePeliculas.Migrations
                             Id = 2,
                             Name = "Claudia"
                         });
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.Producto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Precio")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Productos");
                 });
 
             modelBuilder.Entity("EFCorePeliculas.Entities.SalaDeCine", b =>
@@ -830,119 +787,6 @@ namespace EFCorePeliculas.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EFCorePeliculas.Entities.Merchandising", b =>
-                {
-                    b.HasBaseType("EFCorePeliculas.Entities.Producto");
-
-                    b.Property<bool>("DisponibleEnInventario")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("EsColeccionable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("EsRopa")
-                        .HasColumnType("bit");
-
-                    b.Property<double>("Peso")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Volumen")
-                        .HasColumnType("float");
-
-                    b.ToTable("Merchandising", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Shirt One Piece",
-                            Precio = 11m,
-                            DisponibleEnInventario = true,
-                            EsColeccionable = false,
-                            EsRopa = true,
-                            Peso = 1.0,
-                            Volumen = 1.0
-                        });
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.PagoPaypal", b =>
-                {
-                    b.HasBaseType("EFCorePeliculas.Entities.Pago");
-
-                    b.Property<string>("CorreoElectronico")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasDiscriminator().HasValue(1);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            FechaTransaccion = new DateTime(2022, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Price = 157m,
-                            TipoPago = 1,
-                            CorreoElectronico = "pablito@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FechaTransaccion = new DateTime(2022, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Price = 9.9m,
-                            TipoPago = 1,
-                            CorreoElectronico = "pablito@gmail.com"
-                        });
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.PagoTarjeta", b =>
-                {
-                    b.HasBaseType("EFCorePeliculas.Entities.Pago");
-
-                    b.Property<string>("Ultimos4Difitos")
-                        .IsRequired()
-                        .HasColumnType("char(4)");
-
-                    b.HasDiscriminator().HasValue(2);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FechaTransaccion = new DateTime(2022, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Price = 157m,
-                            TipoPago = 2,
-                            Ultimos4Difitos = "1234"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FechaTransaccion = new DateTime(2022, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Price = 91.9m,
-                            TipoPago = 2,
-                            Ultimos4Difitos = "4321"
-                        });
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.PeliculaAlquilable", b =>
-                {
-                    b.HasBaseType("EFCorePeliculas.Entities.Producto");
-
-                    b.Property<int>("PeliculaId")
-                        .HasColumnType("int");
-
-                    b.ToTable("PeliculaAlquilable", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "Spider-Man",
-                            Precio = 5.99m,
-                            PeliculaId = 1
-                        });
-                });
-
             modelBuilder.Entity("EFCorePeliculas.Entities.Actor", b =>
                 {
                     b.OwnsOne("EFCorePeliculas.Entities.Direccion", "BillingAddress", b1 =>
@@ -1124,24 +968,6 @@ namespace EFCorePeliculas.Migrations
                         .WithMany()
                         .HasForeignKey("SalaDeCinesId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.Merchandising", b =>
-                {
-                    b.HasOne("EFCorePeliculas.Entities.Producto", null)
-                        .WithOne()
-                        .HasForeignKey("EFCorePeliculas.Entities.Merchandising", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EFCorePeliculas.Entities.PeliculaAlquilable", b =>
-                {
-                    b.HasOne("EFCorePeliculas.Entities.Producto", null)
-                        .WithOne()
-                        .HasForeignKey("EFCorePeliculas.Entities.PeliculaAlquilable", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 

@@ -16,5 +16,7 @@ namespace EFCorePeliculas.Entities
         //hashset es mas rapido que otras alternativas como Icollection, pero hashset no ordena
         //se podria usar List si quiero ordenar
         public  HashSet<SalaDeCine> SalasDeCines { get; set; }
+        public CineDetalle CineDetalle { get; set; }
+        public Direccion Direccion { get; set; }
     }
 }

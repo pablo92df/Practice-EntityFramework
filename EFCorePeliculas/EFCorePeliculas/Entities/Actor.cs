@@ -44,5 +44,8 @@ namespace EFCorePeliculas.Entities
             }
         }
 
+        public Direccion DireccionHogar { get; set; }
+        public Direccion BillingAddress { get; set; }
+
     }
 }
